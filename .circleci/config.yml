@@ -115,7 +115,7 @@ jobs:
       - run: 
           name: Scan dependencies for vulnerabilities
           command: | 
-            cd backend && npm install && npm audit fix --force && npm audit --audit-level=critical
+            cd backend && npm install && npm audit fix --force && npm audit --production --audit-level=critical
 
   # deploy-infrastructure:
   #   docker:
