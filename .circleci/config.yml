@@ -102,6 +102,9 @@ jobs:
           name: Scan dependencies for vulnerabilities
           command: | 
             cd frontend && npm install && npm audit --audit-level=critical
+      - save_cache:
+          paths: [frontend/node_modules]
+          key: frontend-build
 
 
   scan-backend:
@@ -116,6 +119,9 @@ jobs:
           name: Scan dependencies for vulnerabilities
           command: | 
             cd backend && npm install && npm audit --audit-level=critical
+      - save_cache:
+          paths: [frontend/node_modules]
+          key: frontend-build
 
   # deploy-infrastructure:
   #   docker:
