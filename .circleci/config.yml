@@ -139,11 +139,7 @@ jobs:
       #         --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
       #         --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
       #       #  exit 1
-      - run:
-          name: Install tar to being able to persist to workspace
-          command: |
-            # install the dependencies needed for your playbook
-            apk add tar
+      - run: yum install -y tar 
       - run:
           name: Add back-end ip to ansible inventory
           command: |
