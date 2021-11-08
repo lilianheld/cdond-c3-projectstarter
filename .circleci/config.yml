@@ -145,7 +145,7 @@ jobs:
             aws cloudformation list-exports \
             --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --query "Exports[?Name==\`ec2-ip\`].Value" \
-            --no-paginate --output text > ~/.circleci/ansible/inventory.txt
+            --no-paginate --output text > ./.circleci/ansible/inventory.txt
             exit 1
       - persist_to_workspace:
           root: ~/
