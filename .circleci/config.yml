@@ -146,6 +146,11 @@ jobs:
             aws cloudformation list-exports \
             --query "Exports[?Name==\`ec2-ip-${CIRCLE_WORKFLOW_ID:0:7}\`].Value" \
             --no-paginate --output text > ./.circleci/ansible/inventory.txt
+      - run: 
+          name: print out inventory.txt file
+          command: | 
+            cat ./.circleci/ansible/inventory.txt
+
       - persist_to_workspace:
           root: ~/
           paths:
@@ -161,6 +166,10 @@ jobs:
           fingerprints: ["b5:da:b8:c8:ab:7b:6b:39:00:6b:eb:6d:be:57:94:24"]
       - attach_workspace:
           at: project/.circleci/ansible
+      - run:
+          name: verify inventory.txt file is present and contains ip address
+          command: |
+            echo "$(<project/.circleci/ansible/inventory.txt)"
       - run:
           name: Install dependencies
           command: |
