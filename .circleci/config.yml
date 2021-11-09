@@ -144,7 +144,7 @@ jobs:
           name: Add back-end ip to ansible inventory
           command: |
             aws cloudformation list-exports \
-            --query "Exports[?Name==\`ec2-ip\`].Value" \
+            --query "Exports[?Name==\`ec2-ip-${CIRCLE_WORKFLOW_ID:0:7}\`].Value" \
             --no-paginate --output text > ./.circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
@@ -165,7 +165,7 @@ jobs:
           name: Install dependencies
           command: |
             # install the dependencies needed for your playbook
-            apk add --update ansible tar gzip awscli
+            apk add --update ansible tar gzip aws-cli
       - run:
           name: Configure server
           command: |

@@ -41,4 +41,4 @@ Outputs:
     Description: public IP address of EC2 Instance
     Value: !GetAtt EC2Instance.PublicIp
     Export: 
-      Name: !Sub ec2-ip
+      Name: !Sub ec2-ip-${ID}
