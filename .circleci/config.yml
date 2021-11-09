@@ -140,14 +140,18 @@ jobs:
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
             # exit 1
       - run: yum install -y tar gzip
+      - run: 
+          name: print out inventory.txt file BEFORE
+          command: | 
+            cat ./.circleci/ansible/inventory.txt
       - run:
           name: Add back-end ip to ansible inventory
           command: |
             aws cloudformation list-exports \
             --query "Exports[?Name==\`ec2-ip-${CIRCLE_WORKFLOW_ID:0:7}\`].Value" \
-            --no-paginate --output text > ./.circleci/ansible/inventory.txt
+            --no-paginate --output text >> ./.circleci/ansible/inventory.txt
       - run: 
-          name: print out inventory.txt file
+          name: print out inventory.txt file AFTER
           command: | 
             cat ./.circleci/ansible/inventory.txt
 
