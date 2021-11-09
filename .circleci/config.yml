@@ -165,11 +165,11 @@ jobs:
       - add_ssh_keys:
           fingerprints: ["b5:da:b8:c8:ab:7b:6b:39:00:6b:eb:6d:be:57:94:24"]
       - attach_workspace:
-          at: .
+          at: ~/
       - run:
           name: verify inventory.txt file is present and contains ip address
           command: |
-            cat ./inventory.txt
+            cat ~/inventory.txt
       - run:
           name: Install dependencies
           command: |
