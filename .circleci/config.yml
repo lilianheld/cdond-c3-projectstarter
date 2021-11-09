@@ -169,7 +169,7 @@ jobs:
       - run:
           name: verify inventory.txt file is present and contains ip address
           command: |
-            cat ~/inventory.txt
+            cat ~/project/.circleci/ansible/inventory.txt
       - run:
           name: Install dependencies
           command: |
