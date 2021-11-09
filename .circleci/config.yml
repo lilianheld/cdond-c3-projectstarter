@@ -165,7 +165,20 @@ jobs:
           name: Install dependencies
           command: |
             # install the dependencies needed for your playbook
-            apk add --update ansible tar gzip aws-cli
+            apk add --update ansible tar gzip
+      - run:
+          name: Install aws-cli
+          command: |
+            apk add --no-cache \
+                python3 \
+                py3-pip \
+            && pip3 install --upgrade pip \
+            && pip3 install --no-cache-dir \
+                awscli \
+            && rm -rf /var/cache/apk/*
+      - run: 
+          name: Verify awscli was installed
+          command: aws --version
       - run:
           name: Configure server
           command: |
