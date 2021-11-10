@@ -302,8 +302,6 @@ jobs:
           command: |
             # install the dependencies needed for your playbook
             apk add --update ansible tar gzip nodejs npm
-    steps:
-      - checkout
       - run:
           name: Install dependencies
           command: |
