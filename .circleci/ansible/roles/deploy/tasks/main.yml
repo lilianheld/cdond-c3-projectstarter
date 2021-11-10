@@ -1,7 +1,7 @@
 - name: Unarchive backend tar file that is still on local machine
   ansible.builtin.unarchive:
-    src: ~/artifact.tar.gz
-    dest: ~/
+    src: /artifact.tar.gz
+    dest: /
     remote_src: no
 
 - name: Executing node
