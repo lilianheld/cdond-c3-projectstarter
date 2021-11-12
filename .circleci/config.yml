@@ -299,7 +299,7 @@ jobs:
           name: Install dependencies
           command: |
             # install the dependencies needed for your playbook
-            apk add --update ansible tar gzip nodejs npm
+            apk add --update ansible tar gzip nodejs npm curl
       - run:
           name: Install aws-cli
           command: |
