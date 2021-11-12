@@ -291,6 +291,7 @@ jobs:
                 echo "artifact.tar.gz does not exist in folder files"
             else
                 echo "artifact.tar.gz found in files folder"
+                tar -tvf ./ansible/roles/deploy/files/artifact.tar.gz
             fi
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
