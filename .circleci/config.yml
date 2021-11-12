@@ -131,20 +131,16 @@ jobs:
               --tags project=udapeople \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
-      # - run:
-      #     name: Ensure front-end infrastructure exist
-      #     command: |
-      #       aws cloudformation deploy \
-      #         --template-file .circleci/files/frontend.yml \
-      #         --tags project=udapeople \
-      #         --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
-      #         --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
-      #       # exit 1
+      - run:
+          name: Ensure front-end infrastructure exist
+          command: |
+            aws cloudformation deploy \
+              --template-file .circleci/files/frontend.yml \
+              --tags project=udapeople \
+              --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
+            # exit 1
       - run: yum install -y tar gzip
-      # - run: 
-      #     name: print out inventory.txt file BEFORE
-      #     command: | 
-      #       cat ./.circleci/ansible/inventory.txt
       - run:
           name: Add back-end ip to ansible inventory
           command: |
@@ -305,10 +301,6 @@ jobs:
             # install the dependencies needed for your playbook
             apk add --update ansible tar gzip nodejs npm
       - run:
-          name: Install dependencies
-          command: |
-            # your code here
-      - run:
           name: Install aws-cli
           command: |
             apk add --no-cache \
@@ -411,8 +403,8 @@ workflows:
           requires: [run-migrations]
       - deploy-backend:
           requires: [run-migrations]
-      # - smoke-test:
-      #     requires: [deploy-backend, deploy-frontend]
+      - smoke-test:
+          requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
       #     requires: [smoke-test]
       # - cleanup:
