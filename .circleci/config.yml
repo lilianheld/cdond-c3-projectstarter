@@ -285,7 +285,13 @@ jobs:
             npm build 
             cd .. 
             # Zip the directory
-            tar -C backend -czvf artifact.tar.gz .
+            tar -C backend -czvf artifact.tar.gz ./ansible/roles/deploy/files
+            if [ ! -f ./ansible/roles/deploy/files/artifact.tar.gz ]
+            then
+                echo "artifact.tar.gz does not exist in folder files"
+            else
+                echo "artifact.tar.gz found in files folder"
+            fi
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
