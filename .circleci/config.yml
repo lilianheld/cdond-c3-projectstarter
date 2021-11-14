@@ -311,16 +311,13 @@ jobs:
                 awscli \
             && rm -rf /var/cache/apk/*
       - run:
-          name: Get backend url
+          name: Get Backend URL & Backend Smoke Test
           command: |
             export BACKEND_IP=$(aws cloudformation list-exports \
             --query "Exports[?Name==\`ec2-ip-${CIRCLE_WORKFLOW_ID:0:7}\`].Value" \
             --no-paginate --output text)
             export API_URL="http://${BACKEND_IP}:3030"
-            echo "${API_URL}"
-      - run:
-          name: Backend smoke test.
-          command: |
+            echo "${API_URL}/api/status"
             if curl "${API_URL}/api/status" | grep "ok"
             then
                 return 0
