@@ -10,7 +10,9 @@ commands:
           command: |
             echo "Destroying environment: ${CIRCLE_WORKFLOW_ID:0:7}"
             aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" --region us-east-2 && \
+            aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
             aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" --region us-east-2
+            # TODO delete stack does not work yet
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.  
@@ -20,6 +22,7 @@ commands:
           when: on_fail
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
+            echo Response=$(curl -H "token: 7933fe63-4687-4fa1-8426-aa25aa1730ec" --request GET https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7})
             SUCCESS=$(curl -H "token: 7933fe63-4687-4fa1-8426-aa25aa1730ec" --request GET https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7})
             if (( $SUCCESS == 1 ));
             then
@@ -27,6 +30,7 @@ commands:
               npm install
               npm run migration:revert
             fi  
+            # TODO revert does not work yet
             
 jobs:
   echo-workflowId:
@@ -259,6 +263,7 @@ jobs:
             npm run build 
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist 
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive 
+            exit 1
       # Here's where you will add some code to rollback on failure
       - destroy-environment
       - revert-migrations      
