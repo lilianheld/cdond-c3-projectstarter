@@ -33,10 +33,10 @@ jobs:
     docker:
       - image: python:3.7-alpine3.11
     steps:
-      -run: 
-        name: write out Pipeline ID
-        command: |
-          echo "Pipeline ID: ${CIRCLE_WORKFLOW_ID:0:7}"
+      - run: 
+          name: write out Pipeline ID
+          command: |
+            echo "Pipeline ID: ${CIRCLE_WORKFLOW_ID:0:7}"
 
   build-frontend:
     docker:
