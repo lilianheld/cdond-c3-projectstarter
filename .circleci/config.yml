@@ -218,7 +218,7 @@ jobs:
       - run:
           name: Send migration results to memstash
           command: |
-          # search string needed to be modified
+            # search string needed to be modified
             if grep -q "No migrations are pending" ~/project/backend/migrations_dump.txt
             then
             echo "Add Migration to memstash!"
