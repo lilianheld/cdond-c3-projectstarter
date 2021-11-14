@@ -254,8 +254,8 @@ jobs:
             --query "Exports[?Name==\`ec2-ip-${CIRCLE_WORKFLOW_ID:0:7}\`].Value" \
             --no-paginate --output text)
             export API_URL="http://${BACKEND_IP}:3030"
-            echo "${API_URL}"
-            echo ${API_URL} >> frontend/.env
+            echo "API_URL = ${API_URL}"
+            echo API_URL=${API_URL} >> frontend/.env
             cat frontend/.env
       - run:
           name: Deploy frontend objects
