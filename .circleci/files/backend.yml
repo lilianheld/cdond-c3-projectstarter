@@ -42,3 +42,8 @@ Outputs:
     Value: !GetAtt EC2Instance.PublicIp
     Export: 
       Name: !Sub ec2-ip-${ID}
+  # ID:
+  #   Description: Workflow ID
+  #   Value: ${ID}
+  #   Export: 
+  #     Name: WorkflowID
