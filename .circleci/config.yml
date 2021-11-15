@@ -171,10 +171,10 @@ jobs:
           fingerprints: ["b5:da:b8:c8:ab:7b:6b:39:00:6b:eb:6d:be:57:94:24"]
       - attach_workspace:
           at: ~/
-      # - run:
-      #     name: verify inventory.txt file is present and contains ip address
-      #     command: |
-      #       cat ~/project/.circleci/ansible/inventory.txt
+      - run:
+          name: verify inventory.txt file is present and contains ip address
+          command: |
+            cat ~/project/.circleci/ansible/inventory.txt
       - run:
           name: Install dependencies
           command: |
@@ -378,7 +378,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - ./OldWorkflowID.txt
+            - project/OldWorkflowID.txt
       # Here's where you will add some code to rollback on failure  
 
   cleanup:
@@ -395,7 +395,7 @@ jobs:
       - run:
           name: Get old stack workflow id
           command: |
-            export OldWorkflowID=$(cat ./OldWorkflowID.txt)
+            export OldWorkflowID=$(cat ~/project/OldWorkflowID.txt)
             echo OldWorkflowID: "${OldWorkflowID}"
             echo CIRCLE_WORKFLOW_ID: "${CIRCLE_WORKFLOW_ID:0:7}"
             # Fetch the stack names          
