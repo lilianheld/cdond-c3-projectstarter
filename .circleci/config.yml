@@ -460,7 +460,7 @@ workflows:
             branches:
               only: [master]
       - cloudfront-update:
-          # requires: [smoke-test]
+          requires: [smoke-test]
           filters:
             branches:
               only: [master]
