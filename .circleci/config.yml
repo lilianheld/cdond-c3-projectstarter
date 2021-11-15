@@ -405,6 +405,7 @@ jobs:
       - run:
           name: Remove old stacks and files
           command: |
+            export OldWorkflowID=$(cat ~/project/OldWorkflowID.txt)
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
               echo "------------------ Clean Up old stacks ---------------------------"
