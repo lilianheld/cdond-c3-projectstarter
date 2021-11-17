@@ -18,11 +18,11 @@
         seconds: 100
 
     - name: "install python for Ansible."
-       become: yes
-       apt:
-         name: python
-         state: latest
-         update_cache: yes
+      become: yes
+      apt:
+        name: python
+        state: latest
+        update_cache: yes
 
   # Get the environment variables from CircleCI and add to the EC2 instance
   environment:
