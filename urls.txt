@@ -1,0 +1,2 @@
+GITHUB_URL=https://github.com/lilianheld/cdond-c3-projectstarter
+URL02_S3BUCKET=http://udapeople-bf8e139.s3.us-east-2.amazonaws.com/index.html#/employees
